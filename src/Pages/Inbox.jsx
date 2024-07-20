@@ -2,14 +2,13 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { MdOutlineReply } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-
 import InboxSidebar from "../components/InboxSidebar";
 import { ThemeContext } from "../Context/ThemeContext";
 import InboxRightSidebar from "../components/InboxRightSidebar";
 import ReplyModal from "../components/ReplyModal";
 import DeleteModal from "../components/DeleteModal";
-// import { getFullDayWithTime } from "../utils/getDate";
-import { staticThreads, staticSelectedThread} from "../constant.js"
+import { getFullDayWithTime } from "../utils/dateFormat.js";
+import { staticSelectedThread} from "../constant.js"
 
 const Inbox = () => {
   const replyButtonRef = useRef(null);
@@ -20,7 +19,15 @@ const Inbox = () => {
 
   const { theme } = useContext(ThemeContext);
   const selected_thread = staticSelectedThread;
-  const loading = false;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -183,7 +190,7 @@ const Inbox = () => {
                           <div className="flex justify-between">
                               <h1 className="font-medium text-lg">{msg?.subject}</h1>
                               <p className="text-sm text-slate-600">
-                           {/* {getFullDayWithTime(new Date(msg.date))} */}
+                           {getFullDayWithTime(new Date(msg.date))}
                               </p>
                           </div>
                           <div className="flex gap-4 text-slate-500 mt-2 mb-2">

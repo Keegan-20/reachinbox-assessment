@@ -3,7 +3,15 @@ import { GoDotFill } from "react-icons/go";
 import { IoIosSend } from "react-icons/io";
 import { ThemeContext } from "../Context/ThemeContext";
 
-const ThreadCard = ({ fromEmail, subject, sentAt, onClick, threadId }) => {
+const ThreadCard = ({
+  fromEmail,
+  subject,
+  sentAt,
+  status,
+  campaign,
+  onClick,
+  threadId,
+}) => {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -12,7 +20,7 @@ const ThreadCard = ({ fromEmail, subject, sentAt, onClick, threadId }) => {
         // Assuming there is no selectedThread in static data context
         "border-l-4 border-transparent"
       } pl-2 hover:cursor-pointer`}
-      onClick={() => onClick(threadId)} // Adjusted to pass threadId
+      onClick={() => onClick(threadId)}
     >
       <div className="flex gap-4 justify-between">
         <p>{fromEmail}</p>
@@ -21,18 +29,29 @@ const ThreadCard = ({ fromEmail, subject, sentAt, onClick, threadId }) => {
             theme === "light" ? "font-extralight" : "font-thin"
           }`}
         >
-         
+          {sentAt}
         </p>
       </div>
 
       <p className="font-extralight line-clamp-1">{subject}</p>
 
       <div className="flex text-sm font-light mt-2 gap-3">
-        <div className="flex items-center gap-2 text-green-500 bg-[#1f1f1f] px-1 rounded-md">
-          <GoDotFill /> Interested
+        <div
+          className={`flex items-center gap-2 py-[3px] px-2 rounded-[17px] ${
+            status === "Interested"
+              ? "text-[#57E0A6] bg-[#1f1f1f]"
+              : status === "Closed"
+              ? "text-[#626FE6] bg-[#1f1f1f]"
+              : status === "Meeting Completed"
+              ? "text-[#E6D162] bg-[#1f1f1f]"
+              : "text-[#9C62E6] bg-[#1f1f1f]"
+          }`}
+        >
+          <GoDotFill /> {status}
         </div>
-        <div className="flex items-center gap-2 text-slate-300 bg-[#1f1f1f] px-1 rounded-md">
-          <IoIosSend /> Campaign Name
+
+        <div className="flex items-center gap-2 text-slate-300 bg-[#1f1f1f] py-[3px] px-2 rounded-[17px]">
+          <IoIosSend /> {campaign}
         </div>
       </div>
     </div>

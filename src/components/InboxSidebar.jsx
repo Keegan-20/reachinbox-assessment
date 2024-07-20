@@ -1,15 +1,22 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
+import "../index.css"; // Ensure shimmer CSS is in this file or imported
 import { ThemeContext } from "../Context/ThemeContext";
 import ThreadCard from "./ThreadCard";
-import { inboxSidebarData } from "../constant.js";
+import { threadsData } from "../constant.js";
 
 const InboxSidebar = () => {
   const { theme } = useContext(ThemeContext);
-  const threads = inboxSidebarData.data; 
-  const loading = false; 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
@@ -86,33 +93,43 @@ const InboxSidebar = () => {
         } flex flex-col `}
       >
         {loading ? (
-          <>
-            <div className="flex flex-col gap-4 rounded-sm pt-2 ">
-              <div
-                className={`${
-                  theme === "dark" ? "skeleton-dark" : "skeleton-light"
-                } h-24 w-full`}
-              ></div>
-              <div
-                className={`${
-                  theme === "dark" ? "skeleton-dark" : "skeleton-light"
-                } h-24 w-full`}
-              ></div>
-            </div>
-          </>
+          <div className="flex flex-col gap-4 rounded-sm pt-2">
+            <div
+              className={`${
+                theme === "dark" ? "skeleton-dark" : "skeleton-light"
+              } h-24 w-full`}
+            ></div>
+            <div
+              className={`${
+                theme === "dark" ? "skeleton-dark" : "skeleton-light"
+              } h-24 w-full`}
+            ></div>
+            <div
+              className={`${
+                theme === "dark" ? "skeleton-dark" : "skeleton-light"
+              } h-24 w-full`}
+            ></div>
+            <div
+              className={`${
+                theme === "dark" ? "skeleton-dark" : "skeleton-light"
+              } h-24 w-full`}
+            ></div>
+            <div
+              className={`${
+                theme === "dark" ? "skeleton-dark" : "skeleton-light"
+              } h-24 w-full`}
+            ></div>
+          </div>
         ) : (
           <>
-            {threads.map((thread) => (
+            {threadsData.map((thread) => (
               <div
                 key={thread.id}
-                className={`border-b-2 ${
+                className={`border-b-2  ${
                   theme === "dark" ? "border-white/50" : "border-black/50"
                 }`}
               >
-                <ThreadCard
-                  {...thread}
-                  onClick={() => {}}
-                />
+                <ThreadCard {...thread} onClick={() => {}} />
               </div>
             ))}
           </>

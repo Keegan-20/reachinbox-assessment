@@ -41,7 +41,6 @@ const months = [
     const amPm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
     const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
   
     return `${dayOfMonth} ${month} ${year} ${hours}:${minutes} ${amPm}`;
   };

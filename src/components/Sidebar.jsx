@@ -67,7 +67,7 @@ const Sidebar = () => {
         />
       </div>
 
-      <div className="bg-green-900 size-10 rounded-full px-1 py-2  flex items-center justify-center">
+      <div className="bg-green-900 size-10 rounded-full px-1 py-2 mb-3 flex items-center justify-center">
         {" "}
         KC{" "}
       </div>

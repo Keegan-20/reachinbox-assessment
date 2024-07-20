@@ -17,7 +17,7 @@ const InboxRightSidebar = () => {
       }  `}
     >
       <div
-        className={`bg-[#1f1f1f] h-10 flex items-center px-5 mt-2 rounded-md mx-2 text-white`}
+        className={`bg-[#23272C] h-10 flex items-center px-5 mt-2 rounded-md mx-2 text-white`}
       >
         Lead Details
       </div>
@@ -62,7 +62,7 @@ const InboxRightSidebar = () => {
             >
               <div className="flex justify-between">
                 <div>Name: </div>
-                <div>{selected_thread[0]?.fromName}</div>
+                <div>Orlando</div>
               </div>
 
               <div className="flex justify-between">
@@ -72,7 +72,7 @@ const InboxRightSidebar = () => {
 
               <div className="flex justify-between">
                 <div className="text-sm">Email ID: </div>
-                <div className="text-sm">{selected_thread[0]?.fromEmail}</div>
+                <div className="text-sm">orlando@gmail.com</div>
               </div>
 
               <div className="flex justify-between">
@@ -90,18 +90,17 @@ const InboxRightSidebar = () => {
       </div>
 
       <div
-        className={`bg-[#1f1f1f] h-10 flex items-center px-5 mt-2 rounded-md mx-2 text-white`}
+        className={`bg-[#23272C] h-10 flex items-center px-5 mt-2 rounded-md mx-2 text-white`}
       >
         Activites
       </div>
 
-      <div className="px-3 pt-6">
+      <div className="px-3 pt-6 gap-3">
         <div
           className={`${theme == "light" ? "text-slate-800" : "text-gray-200"}`}
         >
-          <h1>Campaign Name</h1>
-
-          <p>3 Steps | 5 Days in Sequence</p>
+          <h1 className="pb-3">Campaign Name</h1>
+          <p className="leading-[16.3px] text-sm">3 Steps |  5 Days in Sequence</p>
         </div>
         {loading ? (
           <>
@@ -124,57 +123,55 @@ const InboxRightSidebar = () => {
             </div>
           </>
         ) : (
-          <div>
-            <div className="flex gap-10 items-center  px-3 py-2 mt-2">
-              <div className=" rounded-full size-12 text-white border bg-[#1f1f1f] text-2xl flex items-center justify-center">
+          <div className="relative">
+          <div className="absolute left-9 top-1 bottom-0 w-px bg-gray-400"></div>
+        
+          <div className="flex gap-10 items-center px-3 py-2 mt-2">
+            <div className="relative">
+              <div className="rounded-full size-12 text-white border bg-[#23272C] text-2xl flex items-center justify-center">
                 <MdEmail size={24} />
-              </div>
-              <div
-                className={`${
-                  theme == "dark" ? "text-gray-200" : "text-slate-800"
-                } flex flex-col gap-2 font-light`}
-              >
-                <div>Step 1: Email</div>
-                <div className="flex items-center ">
-                  <BsSendFill className="mr-2" />
-                  <p>Sent: 3rd Feb</p>
-                </div>
               </div>
             </div>
-
-            <div className="flex gap-10 items-center  px-3 py-2 mt-2">
-              <div className=" rounded-full size-12 text-white border bg-[#1f1f1f] text-2xl flex items-center justify-center">
-                <MdEmail size={24} />
-              </div>
-              <div
-                className={`${
-                  theme == "dark" ? "text-gray-200" : "text-slate-800"
-                } flex flex-col gap-2 font-light`}
-              >
-                <div>Step 2: Email</div>
-                <div className="flex items-center ">
-                  <BsFillEnvelopeOpenFill className="mr-2 text-yellow-500" />
-                  <p>Opened: 5th Feb</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-10 items-center  px-3 py-2 mt-2">
-              <div className=" rounded-full size-12 text-white border bg-[#1f1f1f] text-2xl flex items-center justify-center">
-                <MdEmail size={24} />
-              </div>
-              <div
-                className={`${
-                  theme == "dark" ? "text-gray-200" : "text-slate-800"
-                } flex flex-col gap-2 font-light`}
-              >
-                <div>Step 3: Email</div>
-                <div className="flex items-center ">
-                  <BsFillEnvelopeOpenFill className="mr-2 text-yellow-500" />
-                  <p>Opened: 5th Feb</p>
-                </div>
+            <div className={`${theme == "dark" ? "text-gray-200" : "text-slate-800"} flex flex-col gap-2 font-light`}>
+              <div className="text-white">Step 1: Email</div>
+              <div className="flex items-center">
+                <BsSendFill className="mr-2" />
+                <p>Sent: Feb</p>
               </div>
             </div>
           </div>
+        
+          <div className="flex gap-10 items-center px-3 py-2 mt-2">
+            <div className="relative">
+              <div className="rounded-full size-12 text-white border bg-[#23272C] text-2xl flex items-center justify-center">
+                <MdEmail size={24} />
+              </div>
+            </div>
+            <div className={`${theme == "dark" ? "text-gray-200" : "text-slate-800"} flex flex-col gap-2 font-light`}>
+              <div className="text-white">Step 2: Email</div>
+              <div className="flex items-center">
+                <BsFillEnvelopeOpenFill className="mr-2 text-yellow-500" />
+                <p>Opened: 5th Feb</p>
+              </div>
+            </div>
+          </div>
+        
+          <div className="flex gap-10 items-center px-3 py-2 mt-2">
+            <div className="relative">
+              <div className="rounded-full size-12 text-white border bg-[#23272C] text-2xl flex items-center justify-center">
+                <MdEmail size={24} />
+              </div>
+            </div>
+            <div className={`${theme == "dark" ? "text-gray-200" : "text-slate-800"} flex flex-col gap-2 font-light`}>
+              <div className="text-white">Step 3: Email</div>
+              <div className="flex items-center">
+                <BsFillEnvelopeOpenFill className="mr-2 text-yellow-500" />
+                <p>Opened: 5th Feb</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         )}
       </div>
     </div>

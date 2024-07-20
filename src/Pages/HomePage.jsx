@@ -1,26 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../Context/ThemeContext";
-import { useDispatch } from "react-redux";
 import HomeInbox from "/Dashboard-img/HomeInbox.png";
-import { setToken } from "../redux/threadSlice";
 
 const HomePage = () => {
   const { theme, setTheme } = useContext(ThemeContext);
-  const dispatch = useDispatch();
-
-  const currentUrl = window.location.href;
-  const url = new URL(currentUrl);
-  const token = url.searchParams.get("token");
-
-  useEffect(() => {
-    const currentUrl = window.location.href;
-    const url = new URL(currentUrl);
-    const token = url.searchParams.get("token");
-    console.log("TOEk, ", token);
-
-    dispatch(setToken(token));
-  }, [dispatch]);
-
   return (
     <div
       className={`flex justify-center items-center h-[92vh] w-full ${
@@ -43,4 +26,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
- 
