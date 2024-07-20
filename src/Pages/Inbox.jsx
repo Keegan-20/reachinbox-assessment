@@ -1,71 +1,46 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
+import { MdOutlineReply } from "react-icons/md";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+
 import InboxSidebar from "../components/InboxSidebar";
 import { ThemeContext } from "../Context/ThemeContext";
 import InboxRightSidebar from "../components/InboxRightSidebar";
-
-// Static data
-const data = {
-  status: 200,
-  data: [
-    {
-      id: 3,
-      fromName: "Shaw Adley",
-      fromEmail: "shaw@getmemeetings.com",
-      toName: "",
-      toEmail: "mitrajit2022@gmail.com",
-      cc: null,
-      bcc: null,
-      threadId: 1,
-      messageId: "<a5dcWbm1ac5e46d38746648c3e2f6d2c@getmemeetings.com>",
-      inReplyTo: "<4a5cWemdbfda475fabaf856ef5e806a7@gmail.com>",
-      references: "<4a5cWemdbfda475fabaf856ef5e806a7@gmail.com>",
-      subject:
-        "Shaw - following up on our meeting last week... | 7ZG2ZTV 6KG634E",
-      body: "<p>Hi Mitrajit,</p><p>Just wondering if you’re still interested.</p><p>Regards,<br/>Shaw Adley</p><p>6KG634E practicecowboy</p>",
-      isRead: true,
-      folder: "INBOX",
-      uid: 594,
-      sentAt: "2023-11-23T04:08:45.000Z",
-      archivedAt: null,
-      createdAt: "2023-11-23T07:38:46.000Z",
-      updatedAt: "2023-11-23T07:38:46.000Z",
-      deletedAt: null,
-    },
-    {
-      id: 4,
-      fromName: "Shaw Adley",
-      fromEmail: "shaw@getmemeetings.com",
-      toName: "",
-      toEmail: "mitrajit2022@gmail.com",
-      cc: null,
-      bcc: null,
-      threadId: 2,
-      messageId: "<a5dcWbm1ac5e46d38746648c3e2f6d2c@getmemeetings.com>",
-      inReplyTo: "<4a5cWemdbfda475fabaf856ef5e806a7@gmail.com>",
-      references: "<4a5cWemdbfda475fabaf856ef5e806a7@gmail.com>",
-      subject: "Test mail",
-      body: "<p>Test mail</p>",
-      isRead: true,
-      folder: "INBOX",
-      uid: 594,
-      sentAt: "2023-11-23T04:08:45.000Z",
-      archivedAt: null,
-      createdAt: "2023-11-23T07:38:46.000Z",
-      updatedAt: "2023-11-23T07:38:46.000Z",
-      deletedAt: null,
-    },
-  ],
-};
+import ReplyModal from "../components/ReplyModal";
+import DeleteModal from "../components/DeleteModal";
+// import { getFullDayWithTime } from "../utils/getDate";
+import { staticThreads, staticSelectedThread} from "../constant.js"
 
 const Inbox = () => {
-  const [selectedThread, setSelectedThread] = useState(data.data[0] || {});
-  const [threads, setThreads] = useState(data.data || []);
+  const replyButtonRef = useRef(null);
+  const deleteButtonRef = useRef(null);
+
   const [isOpen, setIsOpen] = useState(false);
-  const [deleteOpenModal, setDeleteOpenModal] = useState(false);
+  const [deleteModalOpen, setDeleteOpenModal] = useState(false);
 
   const { theme } = useContext(ThemeContext);
+  const selected_thread = staticSelectedThread;
+  const loading = false;
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key.toLowerCase() === "r") {
+        if (replyButtonRef.current) {
+          replyButtonRef.current.click();
+        }
+      } else if (event.key.toLowerCase() == "d" && isOpen === false) {
+        if (deleteButtonRef.current) {
+          deleteButtonRef.current.click();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   const openDeleteModal = () => {
     setDeleteOpenModal(true);
@@ -86,46 +61,66 @@ const Inbox = () => {
   return (
     <div
       className={`flex h-full ${
-        theme === "dark" ? "bg-black text-white" : "bg-white"
+        theme == "dark" ? "bg-black text-white" : "bg-white flex"
       }`}
     >
       <InboxSidebar />
 
       {/* Middle Part */}
       <div className="flex-grow p-4">
-        {threads.length === 0 ? (
-          <div
-            className={`${
-              theme === "light" ? "text-slate-600" : "text-white"
-            } text-2xl flex justify-center border border-black/40 rounded-md`}
-          >
-            <h1>No Threads found!</h1>
-          </div>
+        {loading ? (
+          <>
+            <div className="flex flex-col gap-3">
+              <div
+                className={`${
+                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                } h-14 w-full`}
+              ></div>
+              <div
+                className={`${
+                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                } h-44 my-2 w-full`}
+              ></div>
+              <div
+                className={`${
+                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                } h-44 my-2 w-full`}
+              ></div>
+            </div>
+          </>
         ) : (
           <>
             <div className="flex justify-between items-center">
-              <div className={`${theme === "light" ? "text-black" : ""} flex flex-col`}>
-                <p>{selectedThread.fromName}</p>
-                <p>{selectedThread.fromEmail}</p>
+              <div
+                className={`${
+                  theme === "light" && "text-black"
+                } flex flex-col`}
+              >
+                <p>{selected_thread[0]?.fromName}</p>
+                <p>{selected_thread[0]?.fromEmail}</p>
               </div>
 
               <div
                 className={`${
-                  theme === "dark" ? "text-white" : "text-black"
+                  theme == "dark" ? "text-black" : "text-white"
                 } flex font-light`}
               >
                 <div className="flex items-center">
-                  <button onClick={openDeleteModal}>
-                    <MdOutlineDeleteOutline
-                      className="text-red-400 mr-2 hover:cursor-pointer"
-                      size={26}
-                    />
-                  </button>
+                  {selected_thread.length > 0 && (
+                    <button ref={deleteButtonRef} onClick={openDeleteModal}>
+                      <MdOutlineDeleteOutline
+                        className="text-red-400 mr-2 hover:cursor-pointer"
+                        size={26}
+                      />
+                    </button>
+                  )}
                 </div>
                 <div>
                   <select
-                    className={`p-1 rounded-md mr-3 border-2 border-black/50 ${
-                      theme === "dark" ? "bg-[#1f1f1f] text-white" : "bg-white text-black"
+                    className={`p-1 rounded-md mr-3  border-2 border-black/50 ${
+                      theme === "dark"
+                        ? "bg-[#1f1f1f] text-white"
+                        : "bg-white text-black"
                     }`}
                   >
                     <option value="option1">Meeting Completed</option>
@@ -136,8 +131,10 @@ const Inbox = () => {
 
                 <div>
                   <select
-                    className={`p-1 rounded-md mr-3 border-2 border-black/50 ${
-                      theme === "dark" ? "bg-[#1f1f1f] text-white" : "bg-white text-black"
+                    className={`p-1 rounded-md mr-3  border-2 border-black/50 ${
+                      theme === "dark"
+                        ? "bg-[#1f1f1f] text-white"
+                        : "text-black bg-white"
                     }`}
                   >
                     <option value="option1">Move</option>
@@ -148,10 +145,12 @@ const Inbox = () => {
 
                 <div
                   className={`border-2 border-black/50 size-8 rounded-md flex items-center justify-center ${
-                    theme === "dark" ? "bg-[#1f1f1f] text-white" : "text-black"
+                    theme === "dark"
+                      ? "bg-[#1f1f1f] text-white"
+                      : "text-black"
                   }`}
                 >
-                  <BsThreeDots />
+                  <BsThreeDots className="" />
                 </div>
               </div>
             </div>
@@ -159,42 +158,71 @@ const Inbox = () => {
             <hr
               className={`mt-3 ${
                 theme === "dark" ? "border-white/30" : "border-black/30"
-              } h-2 border-t-2`}
+              }  h-2 border-t-2`}
             />
 
-            {threads.map((msg) => (
+            {selected_thread.length == 0 && (
               <div
-                key={msg.id}
                 className={`${
-                  theme === "light" ? "bg-white border-2 text-black" : "bg-[#141517]"
-                } p-4 mt-2 rounded-md`}
+                  theme === "light" && "text-slate-600"
+                } text-2xl flex justify-center border border-black/40 rounded-md`}
               >
-                <div className="flex justify-between">
-                  <h1 className="font-medium text-lg">{msg.subject}</h1>
-                  <p className="text-sm text-slate-600">
-                    {/* Date or additional details can be added here */}
-                  </p>
-                </div>
-                <div className="flex gap-4 text-slate-500 mt-2 mb-2">
-                  <p>From: {msg.fromEmail}</p>
-                  <p>CC: {msg.cc || "N/A"}</p>
-                </div>
-
-                <p className="flex gap-4 mb-6 text-slate-500">
-                  To: {msg.toEmail}
-                </p>
-
-                <div
-                  className="text-sm font-light"
-                  dangerouslySetInnerHTML={{ __html: msg.body || "" }}
-                />
+                <h1>No Threads found!</h1>
               </div>
-            ))}
+            )}
+
+            {selected_thread.length > 0 &&
+              selected_thread?.map((msg) => {
+                  return (
+                      <div
+                          key={msg.id}
+                          className={`${theme == "light"
+                                  ? "bg-white border-2 text-black"
+                                  : "bg-[#141517]"} p-4 mt-2 rounded-md`}
+                      >
+                          <div className="flex justify-between">
+                              <h1 className="font-medium text-lg">{msg?.subject}</h1>
+                              <p className="text-sm text-slate-600">
+                           {/* {getFullDayWithTime(new Date(msg.date))} */}
+                              </p>
+                          </div>
+                          <div className="flex gap-4 text-slate-500 mt-2 mb-2">
+                              <p>From: {msg?.fromEmail}</p>
+                              <p>CC: {msg?.cc}</p>
+                          </div>
+
+                          <p className="flex gap-4 mb-6 text-slate-500">
+                              To: {msg?.toEmail}
+                          </p>
+
+                          <div
+                              className="text-sm font-light"
+                              dangerouslySetInnerHTML={{ __html: msg?.body }} />
+                      </div>
+                  );
+              })}
           </>
         )}
+
+        <div className="fixed bottom-5" onClick={openModal}>
+          <button
+            ref={replyButtonRef}
+            className={`bg-gradient-to-r ${
+              theme === "light" && "text-white"
+            } from-blue-400 to-blue-800 flex px-8 py-2 rounded-md items-center gap-2`}
+          >
+            <MdOutlineReply /> Reply
+          </button>
+        </div>
+
+        <div className="">
+          <ReplyModal isOpen={isOpen} onClose={closeModal} />
+        </div>
       </div>
 
-      <InboxRightSidebar isOpen={isOpen} closeModal={closeModal} />
+      <DeleteModal isOpen={deleteModalOpen} onClose={closeDeleteModal} />
+
+      <InboxRightSidebar />
     </div>
   );
 };
