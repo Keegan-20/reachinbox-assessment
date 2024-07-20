@@ -2,13 +2,15 @@ import React, { useContext, useState } from "react";
 import { SliderToggle } from "./ThemeToggleBtn";
 import { IoIosArrowDown } from "react-icons/io";
 import { ThemeContext } from "../Context/ThemeContext";
+import Sidebar from "./Sidebar";
+
 
 const Layout = ({ children }) => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   return (
     <div className="flex">
-  
+    <Sidebar/>
       <div className="w-full flex flex-col">
         <div
           className={`p-4 pl-20 bg-[#1f1f1f] ${
@@ -16,7 +18,7 @@ const Layout = ({ children }) => {
           } text-white flex items-center justify-between`}
         >
           <h1
-            className={`text-2xl font-medium ${
+            className={`text-base font-bold tracking-[-2%] leading-[21.79px] ${
               theme == "dark" ? "text-white" : "text-slate-900"
             }`}
           >
