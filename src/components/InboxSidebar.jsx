@@ -3,6 +3,7 @@ import { IoMdRefresh } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { ThemeContext } from "../Context/ThemeContext";
+import ThreadCard from "./ThreadCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedThread, setThreadsLoading } from "../redux/threadSlice";
 import axios from "axios";
@@ -160,7 +161,45 @@ const InboxSidebar = () => {
           theme === "dark" ? "border-white/30" : "border-black/30"
         }   border-t-2`}
       />
-
+        {/* Threads Card Layout */}
+  <div
+        className={`${
+          theme == "dark" ? "text-white" : "text-black"
+        } flex flex-col `}
+      >
+        {loading ? (
+          <>
+            <div className="flex flex-col gap-4 rounded-sm pt-2 ">
+              <div
+                className={`${
+                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                } h-24 w-full`}
+              ></div>
+              <div
+                className={`${
+                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                } h-24 w-full`}
+              ></div>
+            </div>
+          </>
+        ) : (
+          <>
+            {threads?.map((thread) => (
+              <div
+                key={thread.id}
+                className={`border-b-2 ${
+                  theme === "dark" ? "border-white/50" : "border-black/50"
+                }`}
+              >
+                <ThreadCard
+                  {...thread}
+                  onClick={() => onClick(thread.threadId)}
+                />
+              </div>
+            ))}
+          </>
+        )}
+      </div>
     </div>
   );
 };

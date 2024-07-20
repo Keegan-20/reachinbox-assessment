@@ -52,7 +52,26 @@ function App() {
           </Layout>
         }
       />
-    
+     <Route
+        path="/messages/:thread_id"
+        element={<Layout>{/* <Thread /> */}</Layout>}
+      />
+      <Route
+        path="*"
+        element={
+          <Layout>
+            <div className="relative h-full">
+              <div className="flex border-l-4 h-[432px] ml-20 border-white justify-center items-center gap-3"></div>
+              <div className="absolute top-[428px] left-8 flex flex-col items-center">
+                <h1 className="text-white absolute -top-14 left-1">Go here</h1>
+                <div className="absolute top-1/2 left-0 w-12 h-[4px] bg-white"></div>
+                <div className="absolute -top-1 -left-1 w-0 h-0 border-t-4 border-r-4 border-b-4 border-white transform rotate-45"></div>
+                <div className="absolute top-0 -left-1 w-0 h-0 border-t-4 border-r-4 border-b-4 border-white transform -rotate-45"></div>
+              </div>
+            </div>
+          </Layout>
+        }
+      />
     </Routes>
   );
 }
