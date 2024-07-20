@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Pages/Login";
 import HomePage from "./Pages/HomePage";
+import Inbox from "./Pages/Inbox";
 import Layout from "./components/Layout";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +44,14 @@ function App() {
           </Layout>
         }
       />
-
+   <Route
+        path="/messages"
+        element={
+          <Layout>
+            <Inbox />
+          </Layout>
+        }
+      />
     
     </Routes>
   );

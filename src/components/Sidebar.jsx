@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../Context/ThemeContext";
 
 const Sidebar = () => {
@@ -7,7 +8,7 @@ const Sidebar = () => {
     <aside
       className={`${
         theme == "light" ? "bg-purple-100" : "bg-[#101113]"
-      } text-white w-14 fixed top-0 left-0 h-[100vh] flex flex-col justify-between py-4 items-center`}
+      } text-white w-14 fixed top-0 left-0 h-[100vh] flex flex-col justify-between pt-1 items-center`}
     >
       <img
         src="/Sidebar-img/Logo_holder.png"
@@ -16,7 +17,7 @@ const Sidebar = () => {
         height={40}
       />
 
-      <div className="flex items-center justify-start flex-col gap-7 h-[500px]">
+      <div className="flex items-center justify-start flex-col gap-7 h-[500px] mt-6">
         <img
           src="/Sidebar-img/Home.svg"
           alt="home icon"
@@ -48,14 +49,15 @@ const Sidebar = () => {
           height={28}
         />
         {/* onebox */}
+        <NavLink to="/messages">
+          <img
+            src="/Sidebar-img/Inbox.svg"
+            alt="inbox icon"
+            width={28}
+            height={28.29}
 
-        <img
-          src="/Sidebar-img/Inbox.svg"
-          alt="inbox icon"
-          width={28}
-          height={28.29}
-          className="bg-[#3bf3f3]px-[4px] py-[7px]"
-        />
+          />
+        </NavLink>
 
         <img
           src="/Sidebar-img/bar_chart.svg"
@@ -65,7 +67,10 @@ const Sidebar = () => {
         />
       </div>
 
-      <div className="bg-green-900 size-10 rounded-full px-1 py-2  flex items-center justify-center"> KC </div>
+      <div className="bg-green-900 size-10 rounded-full px-1 py-2  flex items-center justify-center">
+        {" "}
+        KC{" "}
+      </div>
     </aside>
   );
 };

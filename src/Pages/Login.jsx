@@ -1,4 +1,4 @@
-
+import { GOOGLE_LOGIN_URL,GOOGLE_LOCAL_LOGIN_URL} from "../constant.js"
 import google from "/Login-img/google.png";
 import MainLogo from "/Login-img/MainLogo.png";
 
@@ -15,10 +15,11 @@ const Login = () => {
               <p className="text-xl mb-6 text-center leading-[31px] font-sans">
                 Create a new account 
               </p>
-              {/* local development redirection link for Oauthentication*/ }
-                 {/* <a href="https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:5174/">  */}
+              {/* local development redirection link for OAuthentication*/ }
+                 <a href={GOOGLE_LOCAL_LOGIN_URL}> 
 
-                   <a href="https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://reachinbox-assessment.vercel.app">
+              {/* Production  development redirection link for OAuthentication*/ }
+                   {/* <a href={GOOGLE_LOGIN_URL}> */}
                 <button className="rounded border border-[#707172] h-12 flex justify-center items-center gap-2.5 mb-12 w-full  hover:bg-[#333]">
                   <img src={google} alt="google-logo" />
                   Sign Up with Google
