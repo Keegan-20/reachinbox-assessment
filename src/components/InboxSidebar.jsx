@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { IoMdRefresh } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { ThemeContext } from "../Context/ThemeContext";
 import ThreadCard from "./ThreadCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setSelectedThread, setThreadsLoading } from "../redux/threadSlice";
-import axios from "axios";
 
 const data = {
   status: 200,
@@ -62,42 +61,16 @@ const data = {
 };
 
 const InboxSidebar = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
-  const replyButtonRef = useRef(null);
-
-  const str = useSelector((store) => store.threads);
-  console.log(str);
-  const threads = useSelector((store) => store.threads.threads);
-  const loading = useSelector((store) => store.threads.fetchingThreadsLoading);
-  const dispatch = useDispatch();
-
-  const onClick = async (threadId) => {
-    try {
-      dispatch(setThreadsLoading(true));
-      const response = await axios.get(
-        `https://hiring.reachinbox.xyz/api/v1/onebox/messages/${threadId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
-          },
-        }
-      );
-      console.log("res", response.data.data);
-      dispatch(setSelectedThread(response.data.data));
-    } catch (err) {
-      console.log(err);
-    } finally {
-      dispatch(setThreadsLoading(false));
-    }
-  };
+  const { theme } = useContext(ThemeContext);
+  const threads = data.data; // Use static data directly
+  const loading = false; // No need for loading state with static data
 
   return (
     <div
       className={`w-[320px] border-r-2 min-h-[100vh] ${
-        theme == "dark" ? "border-white/30" : "border-black/30"
+        theme === "dark" ? "border-white/30" : "border-black/30"
       } py-4 px-6`}
     >
-      {/* 278 */}
       <div className="flex justify-between">
         <div>
           <div className="flex items-center gap-2">
@@ -131,24 +104,24 @@ const InboxSidebar = () => {
 
       <div
         className={`${
-          theme == "dark" ? "text-white" : "text-black"
+          theme === "dark" ? "text-white" : "text-black"
         } flex justify-between text-white mt-3 items-center`}
       >
         <div
           className={`size-8 text ${
-            theme == "dark" ? "text-sky-600" : "text-white"
+            theme === "dark" ? "text-sky-600" : "text-white"
           } bg-[#1f1f1f] rounded-xl flex items-center justify-center`}
         >
           26
         </div>
         <div
-          className={`pr-10 ${theme == "dark" ? "text-white" : "text-black"}`}
+          className={`pr-10 ${theme === "dark" ? "text-white" : "text-black"}`}
         >
           <h1>New Replies</h1>
         </div>
         <div
           className={`flex items-center gap-2  ${
-            theme == "dark" ? "text-white" : "text-black"
+            theme === "dark" ? "text-white" : "text-black"
           }`}
         >
           <h1>Newest</h1>
@@ -159,12 +132,13 @@ const InboxSidebar = () => {
       <hr
         className={`mt-3 ${
           theme === "dark" ? "border-white/30" : "border-black/30"
-        }   border-t-2`}
+        } border-t-2`}
       />
-        {/* Threads Card Layout */}
-  <div
+
+      {/* Thread */}
+      <div
         className={`${
-          theme == "dark" ? "text-white" : "text-black"
+          theme === "dark" ? "text-white" : "text-black"
         } flex flex-col `}
       >
         {loading ? (
@@ -172,19 +146,19 @@ const InboxSidebar = () => {
             <div className="flex flex-col gap-4 rounded-sm pt-2 ">
               <div
                 className={`${
-                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                  theme === "dark" ? "skeleton-dark" : "skeleton-light"
                 } h-24 w-full`}
               ></div>
               <div
                 className={`${
-                  theme == "dark" ? "skeleton-dark" : "skeleton-light"
+                  theme === "dark" ? "skeleton-dark" : "skeleton-light"
                 } h-24 w-full`}
               ></div>
             </div>
           </>
         ) : (
           <>
-            {threads?.map((thread) => (
+            {threads.map((thread) => (
               <div
                 key={thread.id}
                 className={`border-b-2 ${
@@ -193,7 +167,7 @@ const InboxSidebar = () => {
               >
                 <ThreadCard
                   {...thread}
-                  onClick={() => onClick(thread.threadId)}
+                  onClick={() => {}}
                 />
               </div>
             ))}

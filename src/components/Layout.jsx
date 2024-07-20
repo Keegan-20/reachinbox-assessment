@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { SliderToggle } from "./ThemeToggleBtn";
+import { SliderToggle } from "../Context/ThemeToggleBtn";
 import { IoIosArrowDown } from "react-icons/io";
 import { ThemeContext } from "../Context/ThemeContext";
 import Sidebar from "./Sidebar";

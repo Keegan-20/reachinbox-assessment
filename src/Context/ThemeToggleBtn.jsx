@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { FiMoon, FiSun } from "react-icons/fi";
-import { ThemeContext } from "../Context/ThemeContext";
+import { ThemeContext } from "./ThemeContext";
 
 const TOGGLE_CLASSES =
   "text-sm font-medium flex items-center gap-2 px-3 md:pl-3 md:pr-3.5 py-3 md:py-1.5 transition-colors relative z-10";
