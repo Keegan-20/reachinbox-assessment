@@ -15,12 +15,10 @@ const Login = () => {
               <p className="text-xl mb-6 text-center leading-[31px] font-sans">
                 Create a new account 
               </p>
-              {/* local development redirection link for Oauthentication */}
-              <a
-                className=""
-                href="https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:5174/"
-              >
-               
+              {/* local development redirection link for Oauthentication*/ }
+                 <a href="https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=http://localhost:5174/"> 
+
+
                 <button className="rounded border border-[#707172] h-12 flex justify-center items-center gap-2.5 mb-12 w-full  hover:bg-[#333]">
                   <img src={google} alt="google-logo" />
                   Sign Up with Google
