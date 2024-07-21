@@ -9,7 +9,7 @@ const Login = () => {
         <div className="w-full h-16 flex justify-center items-center border border-slate-800">
           <img src={MainLogo} alt="ReachinBix-Logo" />
         </div>
-        <div className="w-auto flex justify-center items-center sm:p-4">
+        <div className="w-auto flex justify-center items-center ">
           <div className="m-auto w-[460px] h-auto md:h-[312px] bg-gradient-to-r from-[#111214] to-[#121212] rounded-2xl border border-[#343A40] pt-6 px-10">
             <div className="w-[380px] m-auto">
               <p className="text-xl mb-6 text-center leading-[31px] font-sans">
@@ -20,7 +20,7 @@ const Login = () => {
 
               {/* Production  development redirection link for OAuthentication*/ }
                    <a href={GOOGLE_LOGIN_URL}>
-                <button className="rounded border border-[#707172] h-12 flex justify-center items-center gap-2.5 mb-12 w-full  hover:bg-[#333]">
+                <button className="rounded border border-[#707172] h-12 flex justify-center items-center gap-2.5 mb-12 w-full sm:w-[70%]  hover:bg-[#333]">
                   <img src={google} alt="google-logo" />
                   Sign Up with Google
                 </button> 
