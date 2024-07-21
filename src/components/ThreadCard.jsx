@@ -33,11 +33,11 @@ const ThreadCard = ({
         </p>
       </div>
 
-      <p className="font-extralight line-clamp-1">{subject}</p>
+      <p className="font-extralight line-clamp-1 ">{subject}</p>
 
       <div className="flex text-sm font-light mt-2 gap-3">
         <div
-          className={`flex items-center gap-2 py-[3px] px-2 rounded-[17px] ${
+          className={`flex items-center gap-2  text-[12px] leading-[13.62px] font-semibold w-28 h-6 py-[3px] px-2 rounded-[17px] ${
             status === "Interested"
               ? "text-[#57E0A6] bg-[#1f1f1f]"
               : status === "Closed"
@@ -50,8 +50,10 @@ const ThreadCard = ({
           <GoDotFill /> {status}
         </div>
 
-        <div className="flex items-center gap-2 text-slate-300 bg-[#1f1f1f] py-[3px] px-2 rounded-[17px]">
-          <IoIosSend /> {campaign}
+        <div className="flex items-center gap-2 text-slate-300 w-28 h-6 bg-[#1f1f1f] rounded-[17px] px-[3px] py-3 ">
+          <IoIosSend className="h-[12px]" /> <p className="text-[10px] leading-[13.62px] font-semibold ">{campaign}</p>
+          
+          
         </div>
       </div>
     </div>
