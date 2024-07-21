@@ -20,7 +20,7 @@ const Login = () => {
 
               {/* Production  development redirection link for OAuthentication*/ }
                    <a href={GOOGLE_LOGIN_URL}>
-                <button className="rounded border border-[#707172] h-12 flex justify-center items-center gap-2.5 mb-12 w-full sm:w-[70%]  hover:bg-[#333]">
+                <button className="rounded border border-[#707172] h-12 flex justify-center items-center gap-2.5 mb-12 w-full hover:bg-[#333]">
                   <img src={google} alt="google-logo" />
                   Sign Up with Google
                 </button> 
