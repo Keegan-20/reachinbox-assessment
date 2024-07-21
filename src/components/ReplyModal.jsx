@@ -10,13 +10,16 @@ import axios from "axios";
 
 const staticSelectedThread = [
   {
-    id: 3,
-    fromName: "Shaw Adley",
-    fromEmail: "shaw@getmemeetings.com",
-    toName: "Mitrajit",
-    toEmail: "mitrajit2022@gmail.com",
-    subject: "Re: Test mail",
-    body: "Hi Mitrajit, Just wondering if you’re still interested.",
+    id: 1,
+      threadId: "123",
+      fromName: "John Doe",
+      fromEmail: "john.doe@example.com",
+      toName: "Jane Smith",
+      toEmail: "jane.smith@example.com",
+      subject: "Meeting Reminder",
+      body: "<p>Don't forget about our meeting tomorrow at 10 AM.</p>",
+      cc: "manager@example.com",
+      date: "2024-07-20T10:00:00Z",
   },
 ];
 

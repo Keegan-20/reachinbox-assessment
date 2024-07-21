@@ -5,11 +5,11 @@ import MainLogo from "/Login-img/MainLogo.png";
 const Login = () => {
   return (
     <main>
-      <div className="bg-black max-w-[1440px] h-screen m-auto text-white flex flex-col justify-between border-[#25262B]">
+      <div className="bg-black max-w-[1440px] h-screen m-auto text-white flex flex-col justify-between border-[#25262B]  ">
         <div className="w-full h-16 flex justify-center items-center border border-slate-800">
           <img src={MainLogo} alt="ReachinBix-Logo" />
         </div>
-        <div className="w-auto flex justify-center items-center">
+        <div className="w-auto flex justify-center items-center sm:p-4">
           <div className="m-auto w-[460px] h-auto md:h-[312px] bg-gradient-to-r from-[#111214] to-[#121212] rounded-2xl border border-[#343A40] pt-6 px-10">
             <div className="w-[380px] m-auto">
               <p className="text-xl mb-6 text-center leading-[31px] font-sans">

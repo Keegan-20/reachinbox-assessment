@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext,useState,useEffect } from "react";
 import { ThemeContext } from "../Context/ThemeContext";
 import { BsSendFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
 import { MdEmail } from "react-icons/md";
 import { BsFillEnvelopeOpenFill } from "react-icons/bs";
 
 const InboxRightSidebar = () => {
   const { theme, setTheme } = useContext(ThemeContext);
-  const selected_thread = useSelector((store) => store.threads.selectedThread);
-  const loading = useSelector((store) => store.threads.fetchingThreadsLoading);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div
       className={`border-l w-[300px]  ${
