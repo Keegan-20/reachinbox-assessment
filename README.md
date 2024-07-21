@@ -39,6 +39,10 @@ https://reachinbox-assessment.vercel.app/
   
 ![reachinbox-lightmode](./public/Screenshots/ThemeMode.png)
 
+## Demo Video
+Check out the demo video here: [Demo Video](https://www.loom.com/share/8917c85808f640a7a7fec090c8b25b36?sid=96ffcd06-5e13-4c7b-ba6d-865d21f89073
+)
+
 
 ## Project Setup
 
